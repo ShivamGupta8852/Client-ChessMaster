@@ -6,7 +6,8 @@ const useFetchNews = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get('http://localhost:8001/api/news');
+        const response = await axios.get('https://chessmaster-online.onrender.com/api/news');
+        // const response = await axios.get('http://localhost:8001/api/news');
         console.log("response" + response);
         if (response.data.success) {
           const limitedNews = response.data.message.slice(0, 9);
