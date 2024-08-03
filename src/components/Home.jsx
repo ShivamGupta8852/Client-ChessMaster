@@ -14,10 +14,6 @@ const Home = () => {
   const userID = localStorage.getItem("userID") || uuidv4();
   localStorage.setItem("userID", userID);
 
-  // useEffect(() => {
-  //   localStorage.setItem('userID', userID);
-  // }, []);
-
   useEffect(() => {
     socket.on("waiting", () => {
       setWaiting(true);
@@ -68,40 +64,33 @@ const Home = () => {
 
   return (
     <>
-      <div className="max-w-full md:h-[calc(100vh-4rem)]  px-5 py-6 md:py-2 flex flex-col-reverse md:flex-row gap-4 bg-slate-900 text-white">
-        <div>
-          <img className="" src={chessImage} alt="chessImage" />
-        </div>
-        {waiting ? (
-          <WaitingOpponent setWaiting= {setWaiting}  userID = {userID}/>
-          // <div className="w-full flex flex-col justify-center items-center">
-          //   <IoRocketSharp className="text-5xl text-orange-400" />
-          //   <p className="text-2xl w-40 mt-6">
-          //     starting soon<span className="ellipsis"></span>
-          //   </p>
-          //   <button onClick={handleCancel} className="mt-6">
-          //     Cancel
-          //   </button>
-          // </div>
-        ) : (
-          <div className="w-full flex flex-col gap-y-12 justify-center items-center my-20">
-            <button
-              onClick={handlePlayOnline}
-              className="text-2xl shadow-md shadow-slate-500 w-4/5 md:w-1/2 font-semibold bg-slate-700 rounded-[10px] py-6"
-            >
-              Play Online
-            </button>
-            <button
-              onClick={handleInviteFriend}
-              className="text-2xl shadow-md shadow-slate-500 w-4/5 md:w-1/2 font-semibold bg-slate-700 rounded-[10px] py-6"
-            >
-              Invite friend
-            </button>
+      <div className="pt-16 overflow-auto">
+        <div className="max-w-full min-h-[calc(100vh-4rem)] px-5 py-6 md:py-2 flex flex-col-reverse md:flex-row gap-4 bg-slate-900 text-white">
+          <div>
+            <img src={chessImage} alt="chessImage" />
           </div>
-        )}
+          {waiting ? (
+            <WaitingOpponent setWaiting={setWaiting} userID={userID} />
+          ) : (
+            <div className="w-full flex flex-col gap-y-12 justify-center items-center my-20">
+              <button
+                onClick={handlePlayOnline}
+                className="text-2xl shadow-md shadow-slate-500 w-4/5 md:w-1/2 font-semibold bg-slate-700 rounded-[10px] py-6"
+              >
+                Play Online
+              </button>
+              <button
+                onClick={handleInviteFriend}
+                className="text-2xl shadow-md shadow-slate-500 w-4/5 md:w-1/2 font-semibold bg-slate-700 rounded-[10px] py-6"
+              >
+                Invite friend
+              </button>
+            </div>
+          )}
+        </div>
+        <News />
+        <Footer />
       </div>
-      <News />
-      <Footer />
     </>
   );
 };
