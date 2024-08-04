@@ -24,7 +24,7 @@ const Login = () => {
       const res = await axios.post("http://localhost:8001/api/user/login", formData);
       if (res.data.success) {
         toast.success(res.data.message, { theme: "dark", autoClose: 1000 });
-        navigate("/dashboard");  // Redirect to the dashboard or home page
+        navigate("/dashboard");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -82,7 +82,7 @@ const Login = () => {
         <div>
           <button
             type="submit"
-            className="w-full py-2 px-4 bg-green-600 hover:bg-green-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-green-300"
+            className="w-full py-2 px-4 bg-green-500 hover:bg-green-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-green-300"
           >
             Login
           </button>

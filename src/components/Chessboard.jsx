@@ -140,8 +140,8 @@ const Chessboard = () => {
   const displayedBoard = getBoardForRole(chessboard, playingAs);
 
   return (
-    <div className="max-w-full lg:h-[calc(100vh-4rem)]  px-5 py-2 flex gap-4 flex-col lg:flex-row bg-slate-900 text-white">
-      <div className="w-full md:w-auto md:mx-16 flex flex-col lg:justify-center items-center gap-2">
+    <div className="max-w-full md:max-h-screen flex gap-4 flex-col lg:flex-row bg-slate-900 pt-16">
+      <div className="w-full md:w-auto md:mx-16 pt-5 md:pt-0 text-white flex flex-col lg:justify-center items-center gap-2">
         {playingAs === "black" ? <div className="text-xl lg:text-lg">
           White Timer : <span className="bg-slate-700 px-[6px] py-[1.5px] rounded"> {Math.floor(timers.white / 60000)} : {Math.floor((timers.white % 60000) / 1000).toString().padStart(2, '0')}</span>
         </div> : 

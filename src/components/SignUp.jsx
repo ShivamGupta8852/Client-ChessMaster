@@ -34,14 +34,6 @@ const Signup = () => {
       return;
     }
 
-    // const formDataToSend = new FormData();
-    // formDataToSend.append("username", formData.username);
-    // formDataToSend.append("email", formData.email);
-    // formDataToSend.append("password", formData.password);
-    // if (formData.profileImage) {
-    //   formDataToSend.append("profileImage", formData.profileImage);
-    // }
-
     try {
       const res = await axios.post("http://localhost:8001/api/user/signup", formData, {
         headers: {
@@ -180,7 +172,7 @@ const Signup = () => {
           <div>
             <button
               type="submit"
-              className="w-full py-2 px-4 font-medium bg-green-600 hover:bg-green-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-green-300"
+              className="w-full py-2 px-4 font-semibold bg-green-500 hover:bg-green-600 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-green-300"
             >
               Sign Up
             </button>
