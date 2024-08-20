@@ -21,7 +21,8 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8001/api/user/login", formData);
+      const res = await axios.post("https://chessmaster-online.onrender.com/api/user/login", formData);
+      // const res = await axios.post("http://localhost:8001/api/user/login", formData);
       if (res.data.success) {
         toast.success(res.data.message, { theme: "dark", autoClose: 1000 });
         navigate("/dashboard");
