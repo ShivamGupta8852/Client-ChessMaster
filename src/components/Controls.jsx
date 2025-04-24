@@ -74,26 +74,33 @@ const Controls = ({roomID,chessboard,playerTurn,playingAs,moveList}) => {
   }
 
   return (
-    <div className="mt-4 md:mt-3 flex flex-col">
-      <div className="flex flex-wrap md:flex-nowrap justify-between gap-x-2 gap-y-4 md:px-40 lg:gap-x-3">
-        <button onClick={() => socket.emit('beginning',{roomID})} className="text-2xl bg-green-700 text-rose-100 px-6 py-2 rounded-sm"><FaStepBackward /></button>
-        <button onClick={() => socket.emit('undo',{roomID})} className="text-2xl bg-green-700 text-rose-100 px-6 py-2 rounded-sm"><FaUndo /></button>
-        <button onClick={() => socket.emit('redo', {roomID})} className="text-2xl  bg-green-700 text-rose-100 px-6 py-2 rounded-sm"><FaRedo /></button>
-        <button onClick={() => socket.emit('ending',{roomID})} className="text-2xl  bg-green-700 text-rose-100 px-6 py-2 rounded-sm"><FaStepForward /></button>
-        <button onClick={() => playerTurn == playingAs && setIsListening(!isListening)} className="text-2xl bg-green-700 text-rose-100 px-6 py-2 rounded-sm">{isListening ? <FaMicrophone />: <FaMicrophoneSlash />}</button>
+    <div className="md:mt-4  flex flex-col gap-y-4 mb-1">
+      <div className="flex flex-wrap md:flex-nowrap justify-evenly  md:px-40 lg:gap-x-3">
+        <button onClick={() => socket.emit('beginning', { roomID })} className="text-2xl bg-green-700 text-rose-100 md:px-6 px-3 py-2 rounded-sm"><FaStepBackward /></button>
+        <button onClick={() => socket.emit('undo', { roomID })} className="text-2xl bg-green-700 text-rose-100 md:px-6 px-3 py-2 rounded-sm"><FaUndo /></button>
+        <button onClick={() => socket.emit('redo', { roomID })} className="text-2xl bg-green-700 text-rose-100 md:px-6 px-3 py-2 rounded-sm"><FaRedo /></button>
+        <button onClick={() => socket.emit('ending', { roomID })} className="text-2xl bg-green-700 text-rose-100 md:px-6 px-3 py-2 rounded-sm"><FaStepForward /></button>
+        <button onClick={handleVoiceButton} className="text-2xl bg-green-700 text-rose-100 md:px-6 px-3 py-2 rounded-sm">
+          {isListening ? <FaMicrophone /> : <FaMicrophoneSlash />}
+        </button>
       </div>
-      <div className=" mt-4 md:mt-4 flex flex-col mx-5 mb-6 px-2 h-[calc(100vh-4rem)] bg-gray-800">
-        {newMoveList.map((pair,pairIndex) => {
-          return (<div key={pairIndex} className="flex">
-            <div className="w-[30%]">{pairIndex+1}.</div>
-            {pair.map((move,moveIndex) => {
-              return (<div key={moveIndex} className="w-[30%]">
-                {move.to}
-              </div>)
-            })}
-          </div>)
-        })}
 
+      <div className="md:w-[600px] md:mx-auto h-[400px] md:h-[370px] overflow-y-auto flex flex-col pr-0 bg-slate-700 text-white rounded-lg">
+        {newMoveList.map((pair, pairIndex) => {
+          return (
+            <div key={pairIndex} className={`flex items-center py-1 px-3 ${pairIndex%2 == 0 ? "bg-slate-800" : "bg-slate-600"}`}>
+              <div className="w-1/5">{pairIndex + 1}.</div>
+              {pair.map((move, moveIndex) => (
+                <div
+                  key={moveIndex}
+                  className="w-[38%] text-center py-3 ml-1"
+                >
+                  {move.to}
+                </div>
+              ))}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

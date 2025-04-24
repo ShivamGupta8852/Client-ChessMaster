@@ -35,16 +35,16 @@ const Signup = () => {
     }
 
     try {
-      const res = await axios.post("https://chessmaster-online.onrender.com/api/user/signup", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      // const res = await axios.post("http://localhost:8001/api/user/signup", formData, {
+      // const res = await axios.post("https://chessmaster-online.onrender.com/api/user/signup", formData, {
       //   headers: {
       //     "Content-Type": "multipart/form-data",
       //   },
       // });
+      const res = await axios.post("http://localhost:8001/api/user/signup", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       if (res.data.success) {
         toast.success(res.data.message, {
           theme: "dark",

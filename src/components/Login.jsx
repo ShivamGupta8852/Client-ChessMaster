@@ -3,9 +3,12 @@ import { toast } from 'react-toastify';
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FcGoogle } from "react-icons/fc";
+import { useDispatch } from "react-redux";
+import { login, setUser } from "../Redux-Store/slices/loggedUserSlice.jsx";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -21,18 +24,24 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://chessmaster-online.onrender.com/api/user/login", formData);
-      // const res = await axios.post("http://localhost:8001/api/user/login", formData);
+      // const res = await axios.post("https://chessmaster-online.onrender.com/api/user/login", formData);
+      const res = await axios.post("http://localhost:8001/api/user/login", formData,{
+        withCredentials:true,
+      });
+      
       if (res.data.success) {
-        toast.success(res.data.message, { theme: "dark", autoClose: 1000 });
+        toast.success(res.data.message, { theme: "dark", autoClose: 1000, position:'top-right' });
+        const {profileImage,userName,email,token} = res.data;
+        dispatch(login(true));
+        dispatch(setUser({profileImage,userName,email}));
         navigate("/dashboard");
       }
-    } catch (error) {
-      console.error("Error:", error);
-      if (error.response && error.response.data && !error.response.data.success) {
-        toast.warn(error.response.data.message, { theme: "dark", autoClose: 1000 });
+    } catch (err) {
+      console.error("Error:", err);
+      if (err.response && err.response.data && !err.response.data.success) {
+        toast.error(err.response.data.message, { theme: "dark", autoClose: 1000, position:'top-right' });
       } else {
-        toast.error("An unexpected error occurred", { theme: "dark", autoClose: 1000 });
+        toast.error("An unexpected error occurred", { theme: "dark", autoClose: 1000 , position:'top-right'});
       }
     }
   };

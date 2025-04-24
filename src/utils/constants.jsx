@@ -39,3 +39,12 @@ export const initialGameState = () => ([
 
 export const rows = ["8", "7", "6", "5", "4", "3", "2", "1"];
 export const columns = ["a", "b", "c", "d", "e", "f", "g", "h"];
+
+
+export const calculateStars = (rating) => {
+  if (rating >= 1200 && rating < 1400) return 1;
+  if (rating < 1600) return 2;
+  if (rating < 1800) return 3;
+  if (rating < 2000) return 4;
+  return 5;
+};

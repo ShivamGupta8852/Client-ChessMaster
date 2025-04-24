@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* for smooth transition on theme switch */
+/* * {
+  @apply transition-colors duration-200;
+} */
+
 @keyframes ellipsis {
     0% {
       content: '';
@@ -22,3 +27,18 @@
     animation: ellipsis 1s steps(3, end) infinite;
   }
   
+
+
+  /*  customize scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #343b40;
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #0b141a;
+  }

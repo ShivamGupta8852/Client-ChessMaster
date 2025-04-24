@@ -1,12 +1,16 @@
-
 // configured the routes in client side
-import {createBrowserRouter} from 'react-router-dom';
+import {createBrowserRouter, useNavigate} from 'react-router-dom';
 import Chessboard from "../components/Chessboard.jsx";
 import Home from "../components/Home.jsx";
 import About from '../components/About.jsx';
 import App from '../App.jsx';
 import SignUp from '../components/SignUp.jsx';
 import Login from '../components/Login.jsx';
+import Dashboard from '../components/Dashboard.jsx';
+import Profile from '../components/Profile.jsx';
+import {ProtectedRoutes,GameRoute,PublicRoute} from './routesAuth.jsx'
+import EditProfile from '../components/EditProfile.jsx';
+import PlaySection from '../components/PlaySection.jsx';
 
 const route = createBrowserRouter([
     {
@@ -14,25 +18,54 @@ const route = createBrowserRouter([
         element:<App/>,
         children : [
             {
-                path:"/",
+                path:"",
                 element:<Home/>,
             },
             {
-                path:"/about",
+                path:"about",
                 element:<About/>,
             },
             {
-                path:"/signup",
-                element:<SignUp/>,
+                path:"play",
+                element:<PlaySection/>,
             },
             {
-                path:"/login",
-                element:<Login/>,
+                path:"signup",
+                element:(
+                    <PublicRoute>
+                        <SignUp/>
+                    </PublicRoute>
+                ),
             },
             {
-                path:"/game/:roomID",
-                element: <Chessboard/>,
-            }
+                path:"login",
+                element:(
+                    <PublicRoute>
+                        <Login/>
+                    </PublicRoute>
+                ),
+            },
+            {
+                path:"game/:roomID",
+                element: <GameRoute/>,
+            },
+            {
+                element:<ProtectedRoutes/>,
+                children:[
+                    {
+                        path:"dashboard",
+                        element: <Dashboard/>,
+                    },
+                    {
+                        path:"profile",
+                        element: <Profile/>,
+                    },
+                    {
+                        path:'edit-profile',
+                        element:<EditProfile/>,
+                    }
+                ]
+            },
         ]
   
     }

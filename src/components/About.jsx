@@ -5,7 +5,7 @@ const About = () => {
   return (
     <div className="bg-slate-900 flex flex-col items-center pt-16 ">
       <h1 className="text-[1.7rem] md:text-3xl mt-3  font-semibold text-green-300 mb-8 text-center">
-        About Chess Master
+      Explore ChessMaster
       </h1>
 
       {/* welcome */}
@@ -14,7 +14,7 @@ const About = () => {
         <div>
           <p className="text-white text-lg mb-4">
             Welcome to{" "}
-            <span className="font-semibold text-green-300">Chess Master</span>, the
+            <span className="font-semibold text-green-300">ChessMaster</span>, the
             ultimate online chess experience! Whether you're a seasoned
             grandmaster or just starting, Chess Master provides an engaging and
             challenging environment for all skill levels.
